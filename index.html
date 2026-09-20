@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GE 10A - Homework 2: Negative Questions and Tag Questions</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 10px;
+            color: #333;
+            background-image: url('image.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            position: relative;
+            margin: 10px auto;
+        }
+        @media (min-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            .container {
+                padding: 35px;
+            }
+        }
+        h1 {
+            color: #1b4d3e;
+            font-size: 22px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 26px;
+            }
+        }
+        h2, h3 {
+            color: #1b4d3e;
+        }
+        .meta-box {
+            border: 2px dashed #a2c1b5;
+            background: #f2f7f5;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #2c5e4a;
+            font-weight: 600;
+            text-align: center;
+        }
+        @media (min-width: 768px) {
+            .meta-box {
+                font-size: 15px;
+                padding: 12px;
+            }
+        }
+        .timer-box {
+            background: #e8f5e9;
+            border: 1px solid #81c784;
+            color: #2e7d32;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        .instructions-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: left;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        @media (min-width: 768px) {
+            .instructions-card {
+                padding: 20px 25px;
+            }
+        }
+        .instructions-card h3 {
+            color: #1b4d3e;
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 16px;
+            text-align: center;
+        }
+        @media (min-width: 768px) {
+            .instructions-card h3 {
+                font-size: 18px;
+            }
+        }
+        .instructions-card ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        .instructions-card li {
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 14px;
+        }
+        @media (min-width: 768px) {
+            .instructions-card li {
+                font-size: 15px;
+            }
+        }
+        .input-section {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .input-section label {
+            display: block;
+            font-weight: bold;
+            color: #1b4d3e;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+        .input-section input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .input-section input[type="text"]:focus {
+            outline: none;
+            border-color: #2e8b57;
+            box-shadow: 0 0 8px rgba(46, 139, 87, 0.3);
+        }
+        .start-btn {
+            background: linear-gradient(135deg, #2e8b57, #1b4d3e);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: opacity 0.2s, transform 0.1s;
+            box-shadow: 0 4px 15px rgba(46, 139, 87, 0.4);
+        }
+        .start-btn:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+        }
+        .exercise {
+            margin-bottom: 30px;
+        }
+        
+        .question-card {
+            background: #ffffff;
+            border: 1px solid #d8e5df;
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 6px rgba(46, 139, 87, 0.04);
+            transition: all 0.2s ease;
+        }
+        @media (min-width: 768px) {
+            .question-card {
+                padding: 16px 20px;
+                margin-bottom: 15px;
+            }
+        }
+        .question-card:hover {
+            border-color: #a2c1b5;
+            box-shadow: 0 4px 12px rgba(46, 139, 87, 0.08);
+        }
+        .question-text {
+            font-size: 14px;
+            color: #2b3e34;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        @media (min-width: 768px) {
+            .question-text {
+                font-size: 15px;
+                margin-bottom: 12px;
+            }
+        }
+        .question-input {
+            width: 100%;
+            padding: 10px 14px;
+            font-size: 16px; 
+            border: 1px solid #d0ded6;
+            border-radius: 8px;
+            background-color: #fbfdfc;
+            transition: all 0.2s;
+        }
+        .question-input:focus {
+            outline: none;
+            border-color: #2e8b57;
+            background-color: #ffffff;
+            box-shadow: 0 0 8px rgba(46, 139, 87, 0.15);
+        }
+
+        .sample-guide {
+            background: #f0f7f4;
+            border: 1px solid #c2ded0;
+            border-left: 5px solid #2e8b57;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #2c5e4a;
+        }
+        @media (min-width: 768px) {
+            .sample-guide {
+                padding: 15px 20px;
+                font-size: 14px;
+            }
+        }
+        .sample-guide strong {
+            color: #1b4d3e;
+        }
+
+        .submit-container {
+            text-align: center;
+            margin-top: 25px;
+        }
+        .submit-btn {
+            background-color: #1b4d3e;
+            color: white;
+            padding: 14px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+            box-shadow: 0 4px 12px rgba(27, 77, 62, 0.3);
+        }
+        @media (min-width: 768px) {
+            .submit-btn {
+                width: auto;
+                padding: 12px 30px;
+            }
+        }
+        .submit-btn:hover {
+            background-color: #123528;
+        }
+        hr {
+            border: 0;
+            border-top: 1px solid #e0e0e0;
+            margin: 25px 0;
+        }
+        .hidden {
+            display: none !important;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 10px;
+        }
+        .modal-card {
+            background: #fff;
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        @media (min-width: 768px) {
+            .modal-card {
+                padding: 30px;
+            }
+        }
+        .modal-card h2 {
+            color: #1b4d3e;
+            margin-top: 0;
+            font-size: 22px;
+        }
+        .modal-card p {
+            margin: 8px 0;
+            color: #555;
+            font-size: 14px;
+        }
+        .score-display {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1b4d3e;
+            margin: 12px 0;
+        }
+        .feedback-msg {
+            background: #f2f7f5;
+            border: 1px solid #c2ded0;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin: 12px 0;
+            color: #2c5e4a;
+        }
+        .screenshot-warning {
+            font-weight: bold;
+            color: #b02a37;
+            font-size: 12px;
+            margin: 12px 0;
+            text-transform: uppercase;
+        }
+        .modal-btn {
+            background: #2e8b57;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(46, 139, 87, 0.3);
+        }
+        .modal-btn:hover {
+            background: #236b43;
+        }
+        
+        .review-item {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            text-align: left;
+            font-size: 14px;
+        }
+        .review-item.correct {
+            border-left: 5px solid #2e8b57;
+        }
+        .review-item.incorrect {
+            border-left: 5px solid #c92a2a;
+        }
+        .user-ans {
+            font-weight: bold;
+        }
+        .correct-ans {
+            color: #2e8b57;
+            font-weight: bold;
+        }
+        .explanation {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Start Page Section -->
+        <div id="startPage">
+            <h1>📘 Paññāsāstra International School (PSIS) 📘</h1>
+            
+            <div class="meta-box">
+                LEVEL: GE10A &nbsp;|&nbsp; SUBJECT: CORE-ENGLISH &nbsp;|&nbsp; INSTRUCTOR: PKRE
+            </div>
+
+            <div class="instructions-card">
+                <h3>✨ HW 2: U7B: Negative Questions and Tag Questions ✨</h3>
+                <ul>
+                    <li>Complete Exercise 1 by turning statements into negative questions for descriptions, opinions, and reactions (12 items).</li>
+                    <li>Complete Exercise 2 by filling in the correct tag questions (13 items).</li>
+                    <li><strong>Time Limit:</strong> You have strictly <strong>40 minutes</strong> to complete this homework. The exam will auto-submit when time runs out.</li>
+                </ul>
+            </div>
+
+            <form id="startForm" onsubmit="startHomework(event)">
+                <div class="input-section">
+                    <label for="fullName">Enter your Full Name:</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="e.g., John Doe" required>
+                </div>
+
+                <button type="submit" class="start-btn">Start Homework 🚀</button>
+            </form>
+        </div>
+
+        <!-- Homework Content Section -->
+        <div id="homeworkContent" class="hidden">
+            <div class="meta-box" style="margin-bottom: 10px;">
+                Student: <span id="displayName" style="font-weight: bold;"></span> | GE 10A - Homework 2
+            </div>
+
+            <div class="timer-box" id="timerDisplay">
+                ⏱️ Time Remaining: 40:00
+            </div>
+
+            <form id="hwForm" onsubmit="handleFinalSubmission(event)">
+                <!-- Exercise 1 (12 items merged) -->
+                <div class="exercise">
+                    <h3>Exercise 1 - Negative Questions (Statements, Opinions, and Reactions)</h3>
+                    <div class="sample-guide">
+                        💡 <strong>Sample Guide:</strong><br>
+                        Statement: <em>It would have been great if telemarketers had never gotten my number.</em><br>
+                        Negative Question: <em>Wouldn't it have been great if telemarketers had never gotten my number?</em><br><br>
+                        Statement: <em>It's annoying how often telemarketers call.</em><br>
+                        Negative Question: <em>Isn't it annoying how often telemarketers call?</em>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-text">1. It is frustrating when your internet connection drops right in the middle of an important video call.</div>
+                        <input type="text" class="question-input" name="ex1_1" placeholder="Type negative question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">2. Tom should have backed up all his photos before his hard drive crashed.</div>
+                        <input type="text" class="question-input" name="ex1_2" placeholder="Type negative question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">3. It was amazing how quickly that viral video spread across all major social media platforms.</div>
+                        <input type="text" class="question-input" name="ex1_3" placeholder="Type negative question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">4. It seemed like everyone in the office was struggling to learn the new software program.</div>
+                        <input type="text" class="question-input" name="ex1_4" placeholder="Type negative question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">5. It would have been helpful if the streaming service had offered a cheaper subscription plan.</div>
+                        <input type="text" class="question-input" name="ex1_5" placeholder="Type negative question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">6. We should have turned off our phones during the lecture yesterday.</div>
+                        <input type="text" class="question-input" name="ex1_6" placeholder="Type negative question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">7. It was disappointing how fast the battery life on my new smartphone drained.</div>
+                        <input type="text" class="question-input" name="ex1_7" placeholder="Type negative question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">8. It would have been wonderful if the website had a simpler interface for booking tickets.</div>
+                        <input type="text" class="question-input" name="ex1_8" placeholder="Type negative question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">9. Companies should stop tracking our online search history for targeted ads.</div>
+                        <input type="text" class="question-input" name="ex1_9" placeholder="Type negative question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">10. It would be amazing if every public place offered free high-speed Wi-Fi.</div>
+                        <input type="text" class="question-input" name="ex1_10" placeholder="Type negative question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">11. It seems like teenagers spend too much time scrolling through social media feeds.</div>
+                        <input type="text" class="question-input" name="ex1_11" placeholder="Type negative question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">12. There are too many unnecessary features on modern smart devices these days.</div>
+                        <input type="text" class="question-input" name="ex1_12" placeholder="Type negative question here...">
+                    </div>
+                </div>
+
+                <hr>
+
+                <!-- Exercise 2 (13 items) -->
+                <div class="exercise">
+                    <h3>Exercise 2 - Tag Questions</h3>
+                    <div class="sample-guide">
+                        💡 <strong>Sample Guide:</strong><br>
+                        Statement: <em>There were several voice mail messages for me, ________?</em><br>
+                        Tag Question: <em>weren't there?</em>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question-text">1. There haven't been any updates to this operating system recently, ________?</div>
+                        <input type="text" class="question-input" name="ex2_1" placeholder="Type tag question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">2. Someone mentioned that the printer was completely out of ink, ________?</div>
+                        <input type="text" class="question-input" name="ex2_2" placeholder="Type tag question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">3. You didn't leave your personal email logged in on the public computer, ________?</div>
+                        <input type="text" class="question-input" name="ex2_3" placeholder="Type tag question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">4. There was nothing we could do to recover the deleted files, ________?</div>
+                        <input type="text" class="question-input" name="ex2_4" placeholder="Type tag question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">5. Nobody in our class actually reads those long terms and conditions, ________?</div>
+                        <input type="text" class="question-input" name="ex2_5" placeholder="Type tag question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">6. He had already installed the cybersecurity update on his laptop, ________?</div>
+                        <input type="text" class="question-input" name="ex2_6" placeholder="Type tag question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">7. You used to spend hours chatting on internet forums when you were younger, ________?</div>
+                        <input type="text" class="question-input" name="ex2_7" placeholder="Type tag question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">8. There are too many notifications popping up on your screen right now, ________?</div>
+                        <input type="text" class="question-input" name="ex2_8" placeholder="Type tag question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">9. She was working on her laptop in the library yesterday afternoon, ________?</div>
+                        <input type="text" class="question-input" name="ex2_9" placeholder="Type tag question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">10. They won't release the new smartphone model until next month, ________?</div>
+                        <input type="text" class="question-input" name="ex2_10" placeholder="Type tag question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">11. Everybody loves receiving instant notifications on their phones, ________?</div>
+                        <input type="text" class="question-input" name="ex2_11" placeholder="Type tag question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">12. You have never experienced a total hard drive failure before, ________?</div>
+                        <input type="text" class="question-input" name="ex2_12" placeholder="Type tag question here...">
+                    </div>
+                    <div class="question-card">
+                        <div class="question-text">13. Let's back up all our important files to the cloud right now, ________?</div>
+                        <input type="text" class="question-input" name="ex2_13" placeholder="Type tag question here...">
+                    </div>
+                </div>
+
+                <div class="submit-container">
+                    <button type="submit" class="submit-btn">Final Submission 🚀</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Review / Results Modal -->
+        <div id="resultModal" class="modal-overlay hidden">
+            <div class="modal-card" id="modalCardContent" style="max-height: 85vh; overflow-y: auto;">
+                <h2 id="modalTitle">Final Submission</h2>
+                <p>Congratulations, <span id="modalName"></span>.</p>
+                <div class="score-display">You've got <span id="scoreVal">0</span> / 25</div>
+                
+                <div class="feedback-msg" id="feedbackText">
+                    Keep practicing! Take a close look at the review answers to see where you can improve.
+                </div>
+
+                <div class="screenshot-warning">
+                    DO NOT FORGET TO SCREENSHOT THIS AND SEND TO YOUR TEACHER.
+                </div>
+                <p style="font-size: 13px; color: #888;">Make sure to review your answers!</p>
+
+                <button class="modal-btn" onclick="openReviewMode()">Review Answers 👀</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let studentName = "";
+        let userAnswersData = {};
+        let timerInterval;
+        let timeLeft = 2400; // 40 minutes countdown (40 * 60 seconds)
+
+        const answerKey = {
+            ex1_1: ["isn't it frustrating when your internet connection drops right in the middle of an important video call", "wasn't it frustrating when your internet connection drops right in the middle of an important video call"],
+            ex1_2: ["shouldn't tom have backed up all his photos before his hard drive crashed"],
+            ex1_3: ["wasn't it amazing how quickly that viral video spread across all major social media platforms"],
+            ex1_4: ["didn't it seem like everyone in the office was struggling to learn the new software program", "wasn't it like everyone in the office was struggling to learn the new software program"],
+            ex1_5: ["wouldn't it have been helpful if the streaming service had offered a cheaper subscription plan"],
+            ex1_6: ["shouldn't we have turned off our phones during the lecture yesterday"],
+            ex1_7: ["wasn't it disappointing how fast the battery life on my new smartphone drained"],
+            ex1_8: ["wouldn't it have been wonderful if the website had a simpler interface for booking tickets"],
+            ex1_9: ["shouldn't companies stop tracking our online search history for targeted ads"],
+            ex1_10: ["wouldn't it be amazing if every public place offered free high-speed wi-fi", "wouldn't it be amazing if every public place offered free high speed wi fi"],
+            ex1_11: ["doesn't it seem like teenagers spend too much time scrolling through social media feeds", "didn't it seem like teenagers spend too much time scrolling through social media feeds"],
+            ex1_12: ["aren't there too many unnecessary features on modern smart devices these days"],
+            
+            ex2_1: ["have there", "have there?"],
+            ex2_2: ["wasn't it", "wasn't it?"],
+            ex2_3: ["did you", "did you?"],
+            ex2_4: ["was there", "was there?"],
+            ex2_5: ["do they", "do they?"],
+            ex2_6: ["hadn't he", "hadn't he?"],
+            ex2_7: ["didn't you", "didn't you?"],
+            ex2_8: ["aren't there", "aren't there?"],
+            ex2_9: ["wasn't she", "wasn't she?"],
+            ex2_10: ["will they", "will they?"],
+            ex2_11: ["don't they", "don't they?"],
+            ex2_12: ["have you", "have you?"],
+            ex2_13: ["shall we", "shall we?"]
+        };
+
+        const explanations = {
+            ex1_1: "Turn the statement into a negative question by starting with 'Isn't it frustrating when...'",
+            ex1_2: "Use 'Shouldn't + subject + have + past participle' for past obligations/advice.",
+            ex1_3: "Use 'Wasn't it amazing how...' to form a negative question expressing reaction.",
+            ex1_4: "Use 'Didn't it seem like...' or 'Wasn't it...' depending on the main verb structure.",
+            ex1_5: "Use 'Wouldn't it have been helpful if...' for hypothetical past scenarios.",
+            ex1_6: "Use 'Shouldn't we have...' to query past actions or regrets.",
+            ex1_7: "Use 'Wasn't it disappointing how...' to form a negative emotional reaction question.",
+            ex1_8: "Use 'Wouldn't it have been wonderful if...' for unreal past situations.",
+            ex1_9: "Express an opinion/reaction by changing 'Companies should...' to 'Shouldn't companies...'",
+            ex1_10: "Express a reaction/desire by changing 'It would be...' to 'Wouldn't it be...'",
+            ex1_11: "Express surprise or reaction by changing 'It seems like...' to 'Doesn't it seem like...' or 'Didn't it seem like...'",
+            ex1_12: "Express a reaction by changing 'There are too many...' to 'Aren't there too many...'",
+            ex2_1: "After a negative statement ('haven't been'), use the positive auxiliary tag ('have there?').",
+            ex2_2: "After a positive past statement with 'was', use the negative tag ('wasn't it?').",
+            ex2_3: "After a past tense negative statement ('didn't leave'), use the positive tag ('did you?').",
+            ex2_4: "After a statement with 'was nothing' (treated as negative), use the positive tag ('was there?').",
+            ex2_5: "After a negative statement with 'Nobody', the pronoun matches to plural 'they' with positive verb ('do they?').",
+            ex2_6: "After a positive past perfect statement ('had already installed'), use the negative tag ('hadn't he?').",
+            ex2_7: "After a past habit statement with 'used to', use 'didn't you?'.",
+            ex2_8: "After a positive statement with 'There are', use the negative tag ('aren't there?').",
+            ex2_9: "After a positive past continuous statement ('was working'), use the negative tag ('wasn't she?').",
+            ex2_10: "After a negative statement with 'won't', use the positive tag ('will they?').",
+            ex2_11: "After a positive statement with 'Everybody', the pronoun takes plural 'they' with negative tag ('don't they?').",
+            ex2_12: "After a negative statement with 'have never', use the positive tag ('have you?').",
+            ex2_13: "Sentences starting with 'Let's' always take the tag 'shall we?'."
+        };
+
+        function startHomework(event) {
+            event.preventDefault();
+            const nameInput = document.getElementById('fullName').value.trim();
+            if (nameInput) {
+                studentName = nameInput;
+                document.getElementById('displayName').textContent = studentName;
+                document.getElementById('startPage').classList.add('hidden');
+                document.getElementById('homeworkContent').classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                startTimer();
+            }
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    triggerAutoSubmission();
+                } else {
+                    let minutes = Math.floor(timeLeft / 60);
+                    let seconds = timeLeft % 60;
+                    document.getElementById('timerDisplay').textContent = 
+                        `⏱️ Time Remaining: ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                    timeLeft--;
+                }
+            }, 1000);
+        }
+
+        function triggerAutoSubmission() {
+            const form = document.getElementById('hwForm');
+            const formData = new FormData(form);
+            processSubmission(formData);
+        }
+
+        function handleFinalSubmission(event) {
+            event.preventDefault();
+            clearInterval(timerInterval);
+            const formData = new FormData(event.target);
+            processSubmission(formData);
+        }
+
+        function processSubmission(formData) {
+            let score = 0;
+            userAnswersData = {};
+
+            for (let [key, value] of formData.entries()) {
+                let cleanedVal = value.trim().toLowerCase().replace(/[.!?]/g, '');
+                userAnswersData[key] = value.trim();
+                
+                if (answerKey[key]) {
+                    let isCorrect = answerKey[key].some(ans => {
+                        let cleanAns = ans.toLowerCase().replace(/[.!?]/g, '');
+                        return cleanedVal === cleanAns;
+                    });
+                    if (isCorrect) {
+                        score++;
+                    }
+                }
+            }
+
+            document.getElementById('modalName').textContent = studentName;
+            document.getElementById('scoreVal').textContent = score;
+
+            let feedbackString = "";
+            if (score <= 12) {
+                feedbackString = "Needs significant improvement. Review U7B structures carefully and try practicing more negative and tag question exercises!";
+            } else if (score >= 13 && score <= 15) {
+                feedbackString = "Getting there! You understand the basics, but pay closer attention to auxiliary verbs in negative questions.";
+            } else if (score >= 16 && score <= 18) {
+                feedbackString = "Good job! You have a solid grasp of most structures, with just a few minor errors to polish up.";
+            } else if (score >= 19 && score <= 24) {
+                feedbackString = "Great work! Excellent command of negative questions and tag structures. Almost a perfect score!";
+            } else if (score === 25) {
+                feedbackString = "Outstanding! Perfect score! You have completely mastered U7B negative questions and tag questions!";
+            }
+
+            document.getElementById('feedbackText').textContent = feedbackString;
+            document.getElementById('resultModal').classList.remove('hidden');
+        }
+
+        function openReviewMode() {
+            const card = document.getElementById('modalCardContent');
+            card.style.textAlign = "left";
+            
+            let htmlContent = `<h2>Review Answers</h2><p>Student: <strong>${studentName}</strong></p><hr>`;
+            
+            let qCounter = 1;
+            for (let key in answerKey) {
+                let userAns = userAnswersData[key] || "(No answer)";
+                let cleanedUser = userAns.toLowerCase().replace(/[.!?]/g, '');
+                let possibleCorrects = answerKey[key];
+                
+                let isCorrect = possibleCorrects.some(ans => cleanedUser === ans.toLowerCase().replace(/[.!?]/g, ''));
+                
+                htmlContent += `<div class="review-item ${isCorrect ? 'correct' : 'incorrect'}">`;
+                htmlContent += `<div><strong>Q${qCounter}:</strong> Your answer: <span class="user-ans">${userAns}</span> ${isCorrect ? '✅' : '❌'}</div>`;
+                
+                if (!isCorrect) {
+                    htmlContent += `<div style="margin-top: 4px;">Correct answer: <span class="correct-ans">${possibleCorrects[0]}</span></div>`;
+                }
+                htmlContent += `<div class="explanation">💡 <strong>Explanation:</strong> ${explanations[key]}</div>`;
+                htmlContent += `</div>`;
+                qCounter++;
+            }
+
+            htmlContent += `<button class="modal-btn" onclick="location.reload()">Restart Assignment 🔄</button>`;
+            card.innerHTML = htmlContent;
+        }
+    </script>
+
+</body>
+</html>
